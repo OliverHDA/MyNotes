@@ -26,6 +26,5 @@ class MainActivity : AppCompatActivity() {
         viewModel.viewState().observe(this, Observer<MainViewState> { it ->
             it?.let { adapter.notes = it.notes }
         })
-        
     }
 }
