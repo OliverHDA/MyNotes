@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         adapter = MainAdapter()
         ui.mainRecycler.adapter = adapter
 
-        viewModel.viewState().observe(this, Observer<MainViewState> { t ->
-            t?.let { adapter.notes = it.notes }
+        viewModel.viewState().observe(this, Observer<MainViewState> { it ->
+            it?.let { adapter.notes = it.notes }
         })
     }
 }
