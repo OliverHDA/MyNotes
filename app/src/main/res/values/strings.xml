@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyNotes</string>
+    <string name="note_title">Заголовок</string>
+    <string name="note_text">Текст заметки</string>
+    <string name="new_note_title">Новая заметка</string>
+    <string name="todo">TODO</string>
 </resources>
