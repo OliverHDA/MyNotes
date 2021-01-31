@@ -2,4 +2,5 @@
 <resources>
     <dimen name="text_view_margin">8sp</dimen>
     <dimen name="card_view_margin">4dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
 </resources>
