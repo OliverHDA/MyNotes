@@ -52,6 +52,7 @@ object Repository {
             color = Color.VIOLET
         )
     )
+
     init {
         notesLiveData.value = notes
     }
@@ -71,10 +72,6 @@ object Repository {
                 return
             }
         }
-
         notes.add(note)
     }
-
-
-
 }

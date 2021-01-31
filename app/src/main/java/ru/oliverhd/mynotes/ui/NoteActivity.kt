@@ -69,7 +69,6 @@ class NoteActivity : AppCompatActivity() {
         } else {
             getString(R.string.new_note_title)
         }
-
         initView()
     }
 
@@ -87,12 +86,9 @@ class NoteActivity : AppCompatActivity() {
             Color.BLUE -> R.color.color_blue
             else -> R.color.color_white
         }
-
         ui.toolbar.setBackgroundResource(color)
         ui.titleEt.addTextChangedListener(textChangeListener)
         ui.bodyEt.addTextChangedListener(textChangeListener)
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -122,7 +118,6 @@ class NoteActivity : AppCompatActivity() {
 
                 if (note != null) viewModel.saveChanges(note!!)
             }
-
         }, SAVE_DELAY)
     }
 }
