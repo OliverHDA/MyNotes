@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "ru.oliverhd.lesson2practice"
+        applicationId "ru.oliverhd.mynotes"
         minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
