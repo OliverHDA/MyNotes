@@ -1,21 +1,39 @@
 package ru.oliverhd.mynotes.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.Observer
+import ru.oliverhd.mynotes.model.Note
+import ru.oliverhd.mynotes.model.NoteResult
+import ru.oliverhd.mynotes.model.NoteResult.Error
 import ru.oliverhd.mynotes.model.Repository
 import ru.oliverhd.mynotes.ui.MainViewState
+import ru.oliverhd.mynotes.ui.base.BaseViewModel
 
-class MainViewModel : ViewModel() {
+class MainViewModel(val repository: Repository = Repository) :
+    BaseViewModel<List<Note>?, MainViewState>() {
 
-    private val viewStateLiveData: MutableLiveData<MainViewState> = MutableLiveData()
+    private val notesObserver = object : Observer<NoteResult> {
+        override fun onChanged(t: NoteResult?) {
+            if (t == null) return
 
-    init {
-        Repository.getNotes().observeForever {
-            viewStateLiveData.value =
-                viewStateLiveData.value?.copy(notes = it!!) ?: MainViewState(it!!)
+            when (t) {
+                is NoteResult.Success<*> -> {
+                    viewStateLiveData.value = MainViewState(notes = t.data as? List<Note>)
+                }
+                is Error -> {
+                    viewStateLiveData.value = MainViewState(error = t.error)
+                }
+            }
         }
     }
 
-    fun viewState(): LiveData<MainViewState> = viewStateLiveData
+    private val repositoryNotes = repository.getNotes()
+
+    init {
+        viewStateLiveData.value = MainViewState()
+        repositoryNotes.observeForever(notesObserver)
+    }
+
+    override fun onCleared() {
+        repositoryNotes.removeObserver(notesObserver)
+    }
 }
